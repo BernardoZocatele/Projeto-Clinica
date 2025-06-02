@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Logo Castelli</title>
+  <link rel="stylesheet" href="main.css">
+  <script type="text/javascript" src="/eel.js"></script> <!-- Sempre deve exporta esse script. Não precisa criar nada -->
+  <script src="main.js"></script>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="logo">Castelli</div>
+  </div>
+
+  <div class="content">
+
+    <div class="sugest">
+        <h3 id="sugest_text">Sugestões de compras</h3>
+
+        <div class="sugest_box">
+            
+        </div>
+    </div>
+
+    <div class="estoque">
+        <h3 id="add_text">Adicionar produto ao estoque</h3>
+        <div class="add_box">
+            <input type="text" name="input_add_nome" placeholder="Nome do Produto">
+            <input type="text" name="input_add_qtd" placeholder="Quantidade">
+            <input type="text" name="input_add_id" placeholder="Id">
+            <div>
+                <button type="submit">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit">
+      <h3 id="edit_text">Editar estoque</h3>
+
+      <div class="edit_box">
+        <input type="text" name="input_edit_nome" placeholder="Nome do Produto / Id do Produto">
+        <button type="submit">Procurar</button>
+
+        <div class="infos_edit">
+
+
+        </div>
+
+        <input type="text" name="add_qtd" placeholder="Remover">
+        <input type="text" name="remove_qtd" placeholder="Adicionar">
+        <button type="submit">Concluir</button>
+
+      </div>
+    </div>
+
+    <div class="estoque_consulta">
+        <h3>Consultar estoque</h3>
+
+        <div class="consult_box">
+          <input type="text" placeholder="Id / Nome">
+          <button type="submit">Consultar item</button>
+          <button type="submit" onclick="paginaEstoque()">Consultar todo o estoque</button>
+        </div>
+
+    </div>
+  </div>
+</body>
+</html>

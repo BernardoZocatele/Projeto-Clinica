@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    /* Barra superior azul */
+.top-bar {
+    background-color: #004080; /* azul escuro (Hugo falou que as cores eram azul e branco) */
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    /* Logo */
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+}
+
+.sugest, .estoque, .edit, .estoque_consulta{
+    padding: 20px 30px 10px 30px;
+}
+
+.sugest_box, .add_box, .edit_box, .consult_box {
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 20px 10px 20px 20px;
+}
+
+input, button {
+    padding: 5px;
+    margin: 10px;
+}
+
+.infos_edit {
+    border: 2px solid black;
+    padding: 20px 25px 20px 25px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+
+
+
