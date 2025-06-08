@@ -1,47 +1,99 @@
-body {
+/* Reset básico */
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
 }
 
-    /* Barra superior azul */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef3f8;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* Barra superior */
 .top-bar {
-    background-color: #004080; /* azul escuro (Hugo falou que as cores eram azul e branco) */
-    padding: 15px 30px;
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 20px 40px;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-    /* Logo */
+/* Logo */
 .logo {
-    font-size: 1.8em;
-    font-weight: bold;
+    font-size: 2em;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Estilo geral das seções */
+.sugest, .estoque, .edit, .estoque_consulta {
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    max-width: 1000px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Caixas internas */
+.sugest_box, .add_box, .edit_box, .consult_box, .infos_edit {
+    background-color: #f7faff;
+    border-left: 5px solid #007bff;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Inputs e botões */
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botões */
+button {
+    background-color: #007bff;
     color: #ffffff;
-    letter-spacing: 1.5px;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
-.sugest, .estoque, .edit, .estoque_consulta{
-    padding: 20px 30px 10px 30px;
+button:hover {
+    background-color: #0056b3;
 }
 
-.sugest_box, .add_box, .edit_box, .consult_box {
-    border-radius: 10px;
-    border: 2px solid black;
-    padding: 20px 10px 20px 20px;
+/* Responsivo básico */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sugest, .estoque, .edit, .estoque_consulta {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 1.5em;
+    }
 }
-
-input, button {
-    padding: 5px;
-    margin: 10px;
-}
-
-.infos_edit {
-    border: 2px solid black;
-    padding: 20px 25px 20px 25px;
-    border-radius: 10px;
-    margin: 10px;
-}
-
-
-
-
