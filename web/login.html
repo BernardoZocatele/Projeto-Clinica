@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Castelli</div>
+    </div>
+
+    <div class="login">
+        <input type="text" id="user_login" placeholder="Login">
+        <input type="password" id="user_pass" placeholder="Senha">
+        <button onclick="logar_usuario()" type="submit">Logar</button>
+    </div>
+
+    <div class="cadastro">
+        <input type="text" id="nome_cadastro" placeholder="Nome">
+        <input type="text" id="login_cadastro" placeholder="Login">
+        <input type="text" id="senha_cadastro" placeholder="Senha">
+        <input type="text" id="id_cadastro" placeholder="Id Empresa">
+        <input type="text" id="admin_cadastro" placeholder="É admin (s/n)">
+        <button onclick="cadastrar_usuario()" type="submit">Cadastrar</button>
+    </div>
+
+    <button onclick="criar_banco()">Criar banco</button>
+
+    
+    <script>
+
+        function criar_banco() {
+            eel.criar_tabelas()
+        }
+
+        function cadastrar_usuario() {
+            nome = document.getElementById('nome_cadastro').value
+            login = document.getElementById('login_cadastro').value
+            senha = document.getElementById('senha_cadastro').value
+            id = document.getElementById('id_cadastro').value
+            admin = document.getElementById('admin_cadastro').value
+
+            eel.cadastrar_usuario(nome, login, senha, id)
+        }
+
+        function logar_usuario() {
+            login = document.getElementById('user_login').value
+            senha = document.getElementById('user_pass').value
+
+            eel.fazer_login(login, senha)
+        }
+
+        
+
+        function receber_login(info) {
+            if(info) {
+                localStorage.setItem('userInfo', JSON.stringify(info));
+                window.location.href = 'main.html';
+            } else {
+                console.log(info)
+            }
+        }
+
+        eel.expose(receber_login);
+
+    </script>
+
+</body>
+</html>
