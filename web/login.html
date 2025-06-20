@@ -55,12 +55,16 @@
 
         
 
-        function receber_login(info) {
-            if(info) {
-                localStorage.setItem('userInfo', JSON.stringify(info));
+        function receber_login(usuario, empresa_id) {
+            if(usuario && empresa_id) {
+                const infos = {
+                    usuario: usuario,
+                    empresa_id: empresa_id
+                }
+                localStorage.setItem('userInfo', JSON.stringify(infos));
                 window.location.href = 'main.html';
             } else {
-                console.log(info)
+                console.log('Falha ao logar')
             }
         }
 

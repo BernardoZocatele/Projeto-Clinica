@@ -29,12 +29,13 @@ def fazer_login(login, senha):
     resultado = cursor.fetchone()
     conn.close()
     
-    hashed_password = resultado[3]
-    
     if resultado:
+        
+        hashed_password = resultado[3]
+        
         if(check_password(hashed_password, senha)): 
-            eel.receber_login(resultado[2])
+            eel.receber_login(resultado[2], resultado[4])
         else:
-            eel.receber_login(None)
+            eel.receber_login(None, None) # Senha inválida
     else:
-        eel.receber_login(None)
+        eel.receber_login(None, None) # Usuário não encontrado
