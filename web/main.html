@@ -29,11 +29,11 @@
     <div class="estoque">
         <h3 id="add_text">Adicionar produto ao estoque</h3>
         <div class="add_box">
-            <input type="text" name="input_add_nome" placeholder="Nome do Produto">
-            <input type="text" name="input_add_qtd" placeholder="Quantidade">
-            <input type="text" name="input_add_id" placeholder="Id">
+            <input type="text" name="input_add_nome" id="nome" placeholder="Nome do Produto">
+            <input type="text" name="input_add_qtd" id="qtd" placeholder="Quantidade">
+            <input type="text" name="input_add_id"  id="minimo" placeholder="Mínimo">
             <div>
-                <button type="submit">Adicionar</button>
+                <button onclick="adicionar_item()" type="submit">Adicionar</button>
             </div>
         </div>
     </div>
@@ -74,6 +74,14 @@
     if(userInfos) {
       document.getElementById("nome-usuario").textContent = userInfos.usuario
       document.getElementById("empresa-id").textContent = userInfos.empresa_id
+    }
+
+    function adicionar_item() {
+      nome = document.getElementById("nome").value
+      qtd = document.getElementById("qtd").value
+      minimo = document.getElementById("minimo").value
+
+      eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo)
     }
   </script>
 

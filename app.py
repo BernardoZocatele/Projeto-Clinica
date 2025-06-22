@@ -1,6 +1,7 @@
 import eel # importando biblioteca eel
 import funcoes_banco.gerar_banco
 import funcoes_banco.usuario
+import funcoes_banco.estoque
     
 
 eel.init('web') # Diz para o eel qual o nome da psta que irá conter os arquivos web (html, css, java)
