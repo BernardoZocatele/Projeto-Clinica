@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,5 +11,22 @@
         <div class="logo">Castelli</div>
     </div>
     
+    <h2>Estoque da Empresa</h2>
+
+    <div class="estoque_consulta">
+        <h3>Consultar todo o estoque</h3>
+
+        <!-- Botão para consultar o estoque -->
+        <div class="consult_box">
+            <button type="submit" onclick="consultar_estoque()">Consultar todo o estoque</button>
+        </div>
+
+        <!-- Div onde os itens do estoque serão exibidos -->
+        <div id="estoque-lista"></div>
+    </div>
+
+    <script src="/eel.js"></script>
+    <script src="main.js"></script>
+
 </body>
 </html>
