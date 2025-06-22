@@ -97,3 +97,23 @@ button:hover {
         font-size: 1.5em;
     }
 }
+#estoque-lista {
+    margin-top: 20px;
+}
+
+.item-estoque {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.item-estoque p {
+    margin: 5px 0;
+}
+
+.item-estoque hr {
+    margin-top: 10px;
+}
+
