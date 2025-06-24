@@ -23,7 +23,7 @@
         <input type="text" id="login_cadastro" placeholder="Login">
         <input type="text" id="senha_cadastro" placeholder="Senha">
         <input type="text" id="id_cadastro" placeholder="Id Empresa">
-        <input type="text" id="admin_cadastro" placeholder="É admin (s/n)">
+        <input type="checkbox" id="is_admin" value="1">
         <button onclick="cadastrar_usuario()" type="submit">Cadastrar</button>
     </div>
 
@@ -37,18 +37,20 @@
         }
 
         function cadastrar_usuario() {
-            nome = document.getElementById('nome_cadastro').value
-            login = document.getElementById('login_cadastro').value
-            senha = document.getElementById('senha_cadastro').value
-            id = document.getElementById('id_cadastro').value
-            admin = document.getElementById('admin_cadastro').value
+            const nome = document.getElementById('nome_cadastro').value
+            const login = document.getElementById('login_cadastro').value
+            const senha = document.getElementById('senha_cadastro').value
+            const id = document.getElementById('id_cadastro').value
+            const admin = document.getElementById("is_admin");
 
-            eel.cadastrar_usuario(nome, login, senha, id)
+            const is_admin = admin.checked ? 1 : 0;
+
+            eel.cadastrar_usuario(nome, login, senha, id, is_admin)
         }
 
         function logar_usuario() {
-            login = document.getElementById('user_login').value
-            senha = document.getElementById('user_pass').value
+            const login = document.getElementById('user_login').value
+            const senha = document.getElementById('user_pass').value
 
             eel.fazer_login(login, senha)
         }

@@ -4,16 +4,18 @@ from .gerar_banco import conectar
 from criptografia.hashe import hash_password, check_password
 
 @eel.expose
-def cadastrar_usuario(nome, login, senha, empresa):
+def cadastrar_usuario(nome, login, senha, empresa, is_admin):
     conn = conectar()
     cursor = conn.cursor()
     
     hashed_password = hash_password(senha)
+    
+    print(is_admin)
 
     cursor.execute("""
-        INSERT INTO usuarios (empresa_id, nome, login, senha)
-        VALUES (?, ?, ?, ?)
-    """, (empresa, nome, login, hashed_password))
+        INSERT INTO usuarios (empresa_id, nome, login, senha, is_admin)
+        VALUES (?, ?, ?, ?, ?)
+    """, (empresa, nome, login, hashed_password, is_admin))
 
     conn.commit()
     conn.close()

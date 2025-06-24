@@ -26,6 +26,7 @@ def criar_tabelas():
                         login TEXT NOT NULL,
                         senha TEXT NOT NULL,
                         empresa_id INTEGER NOT NULL,
+                        is_admin BOOLEAN DEFAULT FALSE,
                         FOREIGN KEY (empresa_id) REFERENCES empresas(id)
                     )''')
 
