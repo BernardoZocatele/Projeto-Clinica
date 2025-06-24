@@ -8,25 +8,44 @@
 </head>
 <body>
     <div class="top-bar">
-        <div class="logo">Castelli</div>
+        <div class="logo"><a href="main.html">Castelli</a></div>
     </div>
     
     <h2>Estoque da Empresa</h2>
 
-    <div class="estoque_consulta">
-        <h3>Consultar todo o estoque</h3>
-
-        <!-- Botão para consultar o estoque -->
-        <div class="consult_box">
-            <button type="submit" onclick="consultar_estoque()">Consultar todo o estoque</button>
-        </div>
-
-        <!-- Div onde os itens do estoque serão exibidos -->
-        <div id="estoque-lista"></div>
-    </div>
+    <table border="1">
+        <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantidade</th>
+              <th>Empresa ID</th>
+            </tr>
+          </thead>
+        <tbody id="tabela-estoque">
+          <!-- Aqui os dados serão inseridos -->
+        </tbody>
 
     <script src="/eel.js"></script>
-    <script src="main.js"></script>
+
+    <script>
+        const estoque = JSON.parse(localStorage.getItem('estoque'));
+       
+        
+
+      const tabela = document.getElementById("tabela-estoque");
+      tabela.innerHTML = "";
+
+      estoque.forEach(item => {
+        const linha = `
+            <tr>
+                <td>${item[0]}</td>
+                <td>${item[1]}</td>
+                <td>${item[2]}</td>
+            </tr>
+        `;
+        tabela.innerHTML += linha;
+      });
+    </script>
 
 </body>
 </html>

@@ -5,7 +5,6 @@
   <title>Logo Castelli</title>
   <link rel="stylesheet" href="main.css">
   <script type="text/javascript" src="/eel.js"></script> <!-- Sempre deve exporta esse script. Não precisa criar nada -->
-  <script src="main.js"></script>
 </head>
 <body>
 
@@ -61,10 +60,23 @@
         <h3>Consultar estoque</h3>
 
         <div class="consult_box">
-          <input type="text" placeholder="Id / Nome">
-          <button type="submit">Consultar item</button>
-          <button type="submit" onclick="paginaEstoque()">Consultar todo o estoque</button>
+          <input type="text" id="item_consulta" placeholder="Id / Nome">
+          <button onclick="consultar_item()" type="submit">Consultar item</button>
+          <button type="submit" onclick="consultar_estoque()">Consultar todo o estoque</button>
         </div>
+
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantidade</th>
+              <th>Empresa ID</th>
+            </tr>
+          </thead>
+        <tbody id="tabela-estoque">
+          <!-- Aqui os dados serão inseridos -->
+        </tbody>
+</table>
 
     </div>
   </div>
@@ -83,6 +95,42 @@
 
       eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo)
     }
+
+    function consultar_item() {
+      nome = document.getElementById("item_consulta").value
+
+      eel.consultar_estoque(userInfos.empresa_id, nome)
+    }
+
+    function consultar_estoque() {
+      eel.consultar_estoque(userInfos.empresa_id, null)
+    }
+
+    function receber_estoque(estoque) {
+      console.log(estoque)
+
+      const tabela = document.getElementById("tabela-estoque");
+      tabela.innerHTML = "";
+
+      const linha = `
+        <tr>
+            <td>${estoque[0]}</td>
+            <td>${estoque[1]}</td>
+            <td>${estoque[2]}</td>
+        </tr>
+    `;
+
+      tabela.innerHTML = linha;
+    }
+
+    eel.expose(receber_estoque);
+
+    function receber_estoque_todo(estoque) {
+      localStorage.setItem('estoque', JSON.stringify(estoque));
+      window.location.href = 'estoque.html';
+    }
+
+    eel.expose(receber_estoque_todo);
   </script>
 
 </body>

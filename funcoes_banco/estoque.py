@@ -17,37 +17,35 @@ def registrar_log(usuario, item, quantidade, acao, empresa_id):
 
 @eel.expose
 def inserir_item(usuario, empresa_id, nome, qtd, minimo):
-    try:
-        with conectar() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT id FROM estoque WHERE nome = ? AND empresa_id = ?", (nome, empresa_id))
-            resultado = cursor.fetchone()
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id FROM estoque WHERE nome = ? AND empresa_id = ?", (nome, empresa_id))
+    resultado = cursor.fetchone()
 
-            if resultado:
-                cursor.execute("UPDATE estoque SET quantidade = quantidade + ? WHERE nome = ? AND empresa_id = ?", (qtd, nome, empresa_id))
-                print("Item atualizado.")
-            else:
-                cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id) VALUES (?, ?, ?, ?)", (nome, qtd, minimo, empresa_id))
-                print("Item inserido.")
-            conn.commit()
+    if resultado:
+        print("Item já existe no banco.") # Ciar mensagem de erro para o usuario no html
+    else:
+        cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id) VALUES (?, ?, ?, ?)", (nome, qtd, minimo, empresa_id))
+        print("Item inserido.")
+        conn.commit()
         registrar_log(usuario, nome, qtd, 'insercao', empresa_id)
-    except Exception as e:
-        print(f"Erro ao inserir item: {e}")
 
 @eel.expose
 def consultar_estoque(empresa_id, nome_filtro):
-    try:
-        with conectar() as conn:
-            cursor = conn.cursor()
+    
+    conn = conectar()    
+    cursor = conn.cursor()
             
-            if nome_filtro:
-                cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ? AND nome LIKE ?", (empresa_id, '%' + nome_filtro + '%'))
-            else:
-                cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ?", (empresa_id,))
-            
-            resultado = cursor.fetchall()
+    if nome_filtro:
+        # Consulta de um item especifico
+        cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ? AND nome LIKE ?", (empresa_id, nome_filtro))
+        resultado = cursor.fetchone()
+        eel.receber_estoque(resultado)
+    else:
+        # Consulta do estoque inteiro
+        cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ?", (empresa_id,))
+        resultado = cursor.fetchall()
+        eel.receber_estoque_todo(resultado)
         
-        return resultado
-    except Exception as e:
-        print(f"Erro ao consultar estoque: {e}")
-        return []
+        
+    
