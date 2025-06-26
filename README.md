@@ -7,4 +7,4 @@ Para iniciar a aplicação, certifique-se de que esteja na mesma pasta que cont�
 
     python app.py
 
-    Se for a primeira vez iniciando a aplicação ou se não encontrar um aqruivo "estoque.db" na pasta, clique no botão "Gerar banco".
+Se for a primeira vez iniciando a aplicação ou se não encontrar um aqruivo "estoque.db" na pasta, clique no botão "Gerar banco".
