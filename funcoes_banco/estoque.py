@@ -16,7 +16,7 @@ def registrar_log(usuario, item, quantidade, acao, empresa_id):
         print(f"Erro ao registrar log: {e}")
 
 @eel.expose
-def inserir_item(usuario, empresa_id, nome, qtd, minimo):
+def inserir_item(usuario, empresa_id, nome, qtd, minimo, id):
     conn = conectar()
     cursor = conn.cursor()
     cursor.execute("SELECT id FROM estoque WHERE nome = ? AND empresa_id = ?", (nome, empresa_id))
@@ -25,7 +25,7 @@ def inserir_item(usuario, empresa_id, nome, qtd, minimo):
     if resultado:
         print("Item já existe no banco.") # Ciar mensagem de erro para o usuario no html
     else:
-        cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id) VALUES (?, ?, ?, ?)", (nome, qtd, minimo, empresa_id))
+        cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id, id_consulta) VALUES (?, ?, ?, ?, ?)", (nome, qtd, minimo, empresa_id, id))
         print("Item inserido.")
         conn.commit()
         registrar_log(usuario, nome, qtd, 'insercao', empresa_id)

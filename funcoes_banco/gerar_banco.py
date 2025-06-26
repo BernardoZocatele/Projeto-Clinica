@@ -36,6 +36,7 @@ def criar_tabelas():
                         quantidade INTEGER NOT NULL,
                         minimo INTEGER NOT NULL,
                         empresa_id INTEGER NOT NULL,
+                        id_consulta INTEGER NOT NULL,
                         FOREIGN KEY (empresa_id) REFERENCES empresas(id)
                     )''')
 

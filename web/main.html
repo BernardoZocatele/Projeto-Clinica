@@ -30,7 +30,8 @@
         <div class="add_box">
             <input type="text" name="input_add_nome" id="nome" placeholder="Nome do Produto">
             <input type="text" name="input_add_qtd" id="qtd" placeholder="Quantidade">
-            <input type="text" name="input_add_id"  id="minimo" placeholder="Mínimo">
+            <input type="text" name="input_add_min"  id="minimo" placeholder="Mínimo">
+            <input type="text" name="input_add_id"  id="id" placeholder="Id do Produto">
             <div>
                 <button onclick="adicionar_item()" type="submit">Adicionar</button>
             </div>
@@ -92,8 +93,9 @@
       nome = document.getElementById("nome").value
       qtd = document.getElementById("qtd").value
       minimo = document.getElementById("minimo").value
+      id = document.getElementById("id").value
 
-      eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo)
+      eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo, id)
     }
 
     function consultar_item() {
