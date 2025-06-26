@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Logo Castelli</title>
   <link rel="stylesheet" href="main.css">
-  <script type="text/javascript" src="/eel.js"></script> <!-- Sempre deve exporta esse script. Não precisa criar nada -->
+  <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
 
@@ -69,13 +69,13 @@
         <table border="1">
           <thead>
             <tr>
-              <th>Item</th>
+              <th>ID</th>
+              <th>Produto</th>
               <th>Quantidade</th>
-              <th>Empresa ID</th>
             </tr>
           </thead>
         <tbody id="tabela-estoque">
-          <!-- Aqui os dados serão inseridos -->
+        
         </tbody>
 </table>
 
@@ -84,6 +84,7 @@
 
   <script>
     const userInfos = JSON.parse(localStorage.getItem('userInfo'));
+
     if(userInfos) {
       document.getElementById("nome-usuario").textContent = userInfos.usuario
       document.getElementById("empresa-id").textContent = userInfos.empresa_id
@@ -109,16 +110,15 @@
     }
 
     function receber_estoque(estoque) {
-      console.log(estoque)
 
       const tabela = document.getElementById("tabela-estoque");
       tabela.innerHTML = "";
 
       const linha = `
         <tr>
+            <td>${estoque[2]}</td>
             <td>${estoque[0]}</td>
             <td>${estoque[1]}</td>
-            <td>${estoque[2]}</td>
         </tr>
     `;
 

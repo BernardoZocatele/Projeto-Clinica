@@ -32,18 +32,24 @@ def inserir_item(usuario, empresa_id, nome, qtd, minimo, id):
 
 @eel.expose
 def consultar_estoque(empresa_id, nome_filtro):
-    
     conn = conectar()    
     cursor = conn.cursor()
             
     if nome_filtro:
         # Consulta de um item especifico
-        cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ? AND nome LIKE ?", (empresa_id, nome_filtro))
-        resultado = cursor.fetchone()
+        
+        if nome_filtro.isdigit():
+            # Consulta deita por ID do produto
+            cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ? AND id_consulta = ?", (empresa_id, nome_filtro))
+            resultado = cursor.fetchone()
+        else:
+            # Consulta feita por nome do produto
+            cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ? AND nome = ?", (empresa_id, nome_filtro))
+            resultado = cursor.fetchone()
         eel.receber_estoque(resultado)
     else:
         # Consulta do estoque inteiro
-        cursor.execute("SELECT nome, quantidade, empresa_id FROM estoque WHERE empresa_id = ?", (empresa_id,))
+        cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ?", (empresa_id,))
         resultado = cursor.fetchall()
         eel.receber_estoque_todo(resultado)
         
