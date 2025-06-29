@@ -1,17 +1,10 @@
-Depois de clonar o repositório (lembre de baixar o git bash):
-
-    Executar o seguinte comando no terminal (PowerSheel) toda vez que for abrir o arquivo:
-        .\venv\Scripts\activate
-
-        obs: Você deve estar na pasta de origem do projeto.
+Antes de executar a aplicação, certifique-se de que as seguintes bibliotecas estão instaladas na máquina:
     
-    Depois de entrar no ambiente virtual:
-        Executar o seguinte comando para instalar as bibliotecas utilizadas no projeto:
-            pip install -r requirements.txt
-    
-    Ao finalizar alguma parte do projeto:
-        Executar o seguinte comando para atualizar o arquivo requirements.txt:
-            pip freeze > requirements.txt
+    pip install eel
+    pip install bcrypt
 
+Para iniciar a aplicação, certifique-se de que esteja na mesma pasta que contém o arquivo "app.py" e digite o seguinte comando:
 
-OBS: Sempre entre no ambiente virtual, dessa forma as bibliotecas instaladas não ficarão perdidas na máquina.
+    python app.py
+
+Se for a primeira vez iniciando a aplicação ou se não encontrar um aqruivo "estoque.db" na pasta, clique no botão "Gerar banco".
