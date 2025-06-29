@@ -2,137 +2,120 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Logo Castelli</title>
+  <title>Castelli - Controle de Estoque</title>
   <link rel="stylesheet" href="main.css">
   <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
 
-  <div class="top-bar">
+  <header class="top-bar">
     <div class="logo">Castelli</div>
-  </div>
+  </header>
 
-  <h2>Bem-vindo, <span id="nome-usuario"></span>!</h2>
-  <h2>Empresa Id: <span id="empresa-id"></span></h2>
+  <main class="container">
+    <section class="user-info">
+      <h2>Bem-vindo, <span id="nome-usuario"></span>!</h2>
+    </section>
 
-  <div class="content">
+    <section class="sugest">
+      <h3>Sugestões de Compras</h3>
+      <div class="sugest_box"></div>
+    </section>
 
-    <div class="sugest">
-        <h3 id="sugest_text">Sugestões de compras</h3>
-
-        <div class="sugest_box">
-            
-        </div>
-    </div>
-
-    <div class="estoque">
-        <h3 id="add_text">Adicionar produto ao estoque</h3>
-        <div class="add_box">
-            <input type="text" name="input_add_nome" id="nome" placeholder="Nome do Produto">
-            <input type="text" name="input_add_qtd" id="qtd" placeholder="Quantidade">
-            <input type="text" name="input_add_min"  id="minimo" placeholder="Mínimo">
-            <input type="text" name="input_add_id"  id="id" placeholder="Id do Produto">
-            <div>
-                <button onclick="adicionar_item()" type="submit">Adicionar</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="edit">
-      <h3 id="edit_text">Editar estoque</h3>
-
-      <div class="edit_box">
-        <input type="text" name="input_edit_nome" placeholder="Nome do Produto / Id do Produto">
-        <button type="submit">Procurar</button>
-
-        <div class="infos_edit">
-
-
-        </div>
-
-        <input type="text" name="add_qtd" placeholder="Remover">
-        <input type="text" name="remove_qtd" placeholder="Adicionar">
-        <button type="submit">Concluir</button>
-
+    <section class="estoque">
+      <h3>Adicionar Produto ao Estoque</h3>
+      <div class="add_box">
+        <input type="text" id="nome" placeholder="Nome do Produto">
+        <input type="text" id="qtd" placeholder="Quantidade">
+        <input type="text" id="minimo" placeholder="Mínimo">
+        <input type="text" id="id" placeholder="ID do Produto">
+        <button onclick="adicionar_item()">Adicionar</button>
       </div>
-    </div>
+    </section>
 
-    <div class="estoque_consulta">
-        <h3>Consultar estoque</h3>
+    <section class="edit">
+      <h3>Editar Estoque</h3>
+      <div class="edit_box">
+        <input type="text" id="input_edit_nome" placeholder="Nome ou ID do Produto">
+        <input type="text" id="qtd_edit" placeholder="Quantidade">
+        <button onclick="editar_estoque(2)">Adicionar</button>
+        <button onclick="editar_estoque(1)">Remover</button>
+        <span id="erro_editar"></span>
+      </div>
+    </section>
 
-        <div class="consult_box">
-          <input type="text" id="item_consulta" placeholder="Id / Nome">
-          <button onclick="consultar_item()" type="submit">Consultar item</button>
-          <button type="submit" onclick="consultar_estoque()">Consultar todo o estoque</button>
-        </div>
+    <section class="estoque_consulta">
+      <h3>Consultar Estoque</h3>
+      <div class="consult_box">
+        <input type="text" id="item_consulta" placeholder="ID ou Nome">
+        <button onclick="consultar_item()">Consultar Item</button>
+        <button onclick="consultar_estoque()">Consultar Todo o Estoque</button>
+      </div>
 
-        <table border="1">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Produto</th>
-              <th>Quantidade</th>
-            </tr>
-          </thead>
-        <tbody id="tabela-estoque">
-        
-        </tbody>
-</table>
-
-    </div>
-  </div>
+      <table class="tabela-estoque">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-estoque"></tbody>
+      </table>
+    </section>
+  </main>
 
   <script>
     const userInfos = JSON.parse(localStorage.getItem('userInfo'));
 
-    if(userInfos) {
-      document.getElementById("nome-usuario").textContent = userInfos.usuario
-      document.getElementById("empresa-id").textContent = userInfos.empresa_id
+    if (userInfos) {
+      document.getElementById("nome-usuario").textContent = userInfos.usuario;
     }
 
     function adicionar_item() {
-      nome = document.getElementById("nome").value
-      qtd = document.getElementById("qtd").value
-      minimo = document.getElementById("minimo").value
-      id = document.getElementById("id").value
+      const nome = document.getElementById("nome").value;
+      const qtd = document.getElementById("qtd").value;
+      const minimo = document.getElementById("minimo").value;
+      const id = document.getElementById("id").value;
 
-      eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo, id)
+      eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo, id);
     }
 
     function consultar_item() {
-      nome = document.getElementById("item_consulta").value
-
-      eel.consultar_estoque(userInfos.empresa_id, nome)
+      const nome = document.getElementById("item_consulta").value;
+      eel.consultar_estoque(userInfos.empresa_id, nome);
     }
 
     function consultar_estoque() {
-      eel.consultar_estoque(userInfos.empresa_id, null)
+      eel.consultar_estoque(userInfos.empresa_id, null);
     }
 
     function receber_estoque(estoque) {
-
       const tabela = document.getElementById("tabela-estoque");
-      tabela.innerHTML = "";
-
-      const linha = `
+      tabela.innerHTML = `
         <tr>
-            <td>${estoque[2]}</td>
-            <td>${estoque[0]}</td>
-            <td>${estoque[1]}</td>
+          <td>${estoque[2]}</td>
+          <td>${estoque[0]}</td>
+          <td>${estoque[1]}</td>
         </tr>
-    `;
-
-      tabela.innerHTML = linha;
+      `;
     }
-
-    eel.expose(receber_estoque);
 
     function receber_estoque_todo(estoque) {
       localStorage.setItem('estoque', JSON.stringify(estoque));
       window.location.href = 'estoque.html';
     }
 
+    function editar_estoque(acao) {
+      const qtd = document.getElementById('qtd_edit').value;
+      const nome = document.getElementById('input_edit_nome').value;
+
+      eel.editar_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, acao);
+    }
+
+
     eel.expose(receber_estoque_todo);
+    eel.expose(receber_estoque);
   </script>
 
 </body>
