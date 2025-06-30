@@ -1,37 +1,79 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eef3f8;
+  color: #1a1a1a;
+  line-height: 1.6;
 }
 
-    /* Barra superior azul */
 .top-bar {
-    background-color: #004080; /* azul escuro (Hugo falou que as cores eram azul e branco) */
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #0056b3; 
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-    /* Logo */
 .logo {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #ffffff;
-    letter-spacing: 1.5px;
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.estoque {
+  background-color: #fff;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.estoque h3 {
+  margin-bottom: 20px;
+}
+
 .tabela-estoque {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
 .tabela-estoque th, .tabela-estoque td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
 }
 
 .tabela-estoque th {
-    background-color: #007bff;
-    color: #fff;
+  background-color: #0056b3; 
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    font-size: 1.5em;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
 }
