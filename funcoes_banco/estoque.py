@@ -23,7 +23,7 @@ def inserir_item(usuario, empresa_id, nome, qtd, minimo, id):
         cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id, id_consulta) VALUES (?, ?, ?, ?, ?)", (nome, qtd, minimo, empresa_id, id))
         print("Item inserido.")
         conn.commit()
-        registrar_log(usuario, nome, qtd, 'insercao', empresa_id)
+        registrar_log(usuario, nome, qtd, 'insercao', empresa_id, conn)
     
     conn.commit()
     conn.close()
