@@ -27,3 +27,10 @@ function consultar_estoque() {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', function () {
+  const numeroWhatsApp = "5524993134184"; // <-- substituir pelo numero
+  document.getElementById('whatsapp-btn').addEventListener('click', function () {
+    const url = `https://wa.me/${numeroWhatsApp}`;
+    window.open(url, '_blank');
+  });
+});
