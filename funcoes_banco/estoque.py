@@ -18,11 +18,11 @@ def inserir_item(usuario, empresa_id, nome, qtd, minimo, id):
     resultado = cursor.fetchone()
 
     if resultado:
-        print("Item já existe no banco.") # Ciar mensagem de erro para o usuario no html
+        eel.mensagem_usuario("Item já cadastrado no estoque.") 
     else:
         cursor.execute("INSERT INTO estoque (nome, quantidade, minimo, empresa_id, id_consulta) VALUES (?, ?, ?, ?, ?)", (nome, qtd, minimo, empresa_id, id))
-        print("Item inserido.")
         conn.commit()
+        eel.mensagem_usuario("Item Cadastrado com sucesso.") 
         registrar_log(usuario, nome, qtd, 'insercao', empresa_id, conn)
     
     conn.commit()
@@ -35,7 +35,6 @@ def consultar_estoque(empresa_id, nome_filtro):
             
     if nome_filtro:
         # Consulta de um item especifico
-        
         if nome_filtro.isdigit():
             # Consulta deita por ID do produto
             cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ? AND id_consulta = ?", (empresa_id, nome_filtro))
@@ -44,12 +43,18 @@ def consultar_estoque(empresa_id, nome_filtro):
             # Consulta feita por nome do produto
             cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ? AND nome = ?", (empresa_id, nome_filtro))
             resultado = cursor.fetchone()
-        eel.receber_estoque(resultado)
+            
+        if resultado:
+            eel.receber_estoque(resultado)
+        else:
+            eel.mensagem_usuario("Item não encontrado no estoque.")
     else:
         # Consulta do estoque inteiro
         cursor.execute("SELECT nome, quantidade, id_consulta FROM estoque WHERE empresa_id = ?", (empresa_id,))
         resultado = cursor.fetchall()
         eel.receber_estoque_todo(resultado)
+        
+    conn.close()
         
 
 @eel.expose
@@ -77,8 +82,9 @@ def editar_item(usuario, empresa_id, nome, qtd, acao):
                 else:
                     cursor.execute("UPDATE estoque SET quantidade = quantidade - ? WHERE nome = ? AND empresa_id = ?", (qtd, nome, empresa_id))
                 registrar_log(usuario, nome, qtd, 'baixa', empresa_id, conn)
+                eel.mensagem_usuario("Estoque atualizado com sucesso.") 
             else:
-                print("Quantidade insuficiente.")  # Informar erro ao usuário no html
+                eel.mensagem_usuario("Quantidade insuficiente no estoque.")
         else:
             # Ação 2 - Adicionar item 
             if nome.isdigit():
@@ -86,8 +92,10 @@ def editar_item(usuario, empresa_id, nome, qtd, acao):
             else:
                 cursor.execute("UPDATE estoque SET quantidade = quantidade + ? WHERE nome = ? AND empresa_id = ?", (qtd, nome, empresa_id))
             registrar_log(usuario, nome, qtd, 'entrada', empresa_id, conn)
+            eel.mensagem_usuario("Estoque atualizado com sucesso.") 
     else:
-        print("Item não encontrado.")  # Informar erro ao usuário no html
+        eel.mensagem_usuario("Item não encontrado no estoque.")
+        
     conn.commit()
     conn.close()
         

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Castelli - Controle de Estoque</title>
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
@@ -114,10 +115,29 @@
       eel.editar_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, acao);
     }
 
+    function mensagem_usuario(mensagem) {
+      Toastify({
+        text: mensagem,
+        duration: 6000,
+        newWindow: true,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background: "blue",
+          width: "450px",
+          textAlign: "center",
+          borderRadius: "10px"
+        },
+      }).showToast();
+    }
 
+    eel.expose(mensagem_usuario);
     eel.expose(receber_estoque_todo);
     eel.expose(receber_estoque);
   </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 <!DOCTYPE html>
