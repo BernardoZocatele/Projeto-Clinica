@@ -38,6 +38,6 @@ def fazer_login(login, senha):
         if(check_password(hashed_password, senha)): 
             eel.receber_login(resultado[2], resultado[4])
         else:
-            eel.receber_login(None, None) # Senha inválida
+            eel.mensagem_usuario("As credenciais informadas estão incorretas.") 
     else:
-        eel.receber_login(None, None) # Usuário não encontrado
+        eel.mensagem_usuario("As credenciais informadas estão incorretas.") 

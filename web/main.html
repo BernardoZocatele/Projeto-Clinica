@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Castelli - Controle de Estoque</title>
+  <title>Castelli</title>
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="/eel.js"></script>
@@ -10,7 +10,8 @@
 <body>
 
   <header class="top-bar">
-    <div class="logo">Castelli</div>
+    <div class="logo">Castelli
+    </div>
   </header>
 
   <main class="container">
@@ -26,11 +27,13 @@
     <section class="estoque">
       <h3>Adicionar Produto ao Estoque</h3>
       <div class="add_box">
-        <input type="text" id="nome" placeholder="Nome do Produto">
-        <input type="text" id="qtd" placeholder="Quantidade">
-        <input type="text" id="minimo" placeholder="Mínimo">
-        <input type="text" id="id" placeholder="ID do Produto">
-        <button onclick="adicionar_item()">Adicionar</button>
+        <form action="">
+          <input type="text" id="nome" placeholder="Nome do Produto">
+          <input type="text" id="qtd" placeholder="Quantidade">
+          <input type="text" id="minimo" placeholder="Mínimo">
+          <input type="text" id="id" placeholder="ID do Produto">
+          <button onclick="adicionar_item()">Adicionar</button>
+        </form>
       </div>
     </section>
 
@@ -65,7 +68,18 @@
         <tbody id="tabela-estoque"></tbody>
       </table>
     </section>
+
+    <div class="adicionais">
+      <button onclick="consultar_logs()">Consultar logs</button>
+      <button>Cadastrar usuário</button>
+    </div>
+  
   </main>
+
+  <button id="whatsapp-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" />
+      Fale conosco no WhatsApp
+    </button>
 
   <script>
     const userInfos = JSON.parse(localStorage.getItem('userInfo'));
@@ -79,6 +93,10 @@
       const qtd = document.getElementById("qtd").value;
       const minimo = document.getElementById("minimo").value;
       const id = document.getElementById("id").value;
+
+      if (nome == "" || qtd == "" || minimo == "" || id == "") {
+        mensagem_usuario("Os campos precisam estar preenchidos.")
+      }
 
       eel.inserir_item(userInfos.usuario, userInfos.empresa_id, nome, qtd, minimo, id);
     }
@@ -132,6 +150,16 @@
       }).showToast();
     }
 
+    function consultar_logs() {
+      eel.consultar_log(userInfos.empresa_id);
+    }
+
+    function receber_logs(logs) {
+      localStorage.setItem('logs', JSON.stringify(logs));
+      window.location.href = 'logs.html';
+    }
+
+    eel.expose(receber_logs);
     eel.expose(mensagem_usuario);
     eel.expose(receber_estoque_todo);
     eel.expose(receber_estoque);
@@ -139,22 +167,5 @@
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-</body>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Botão WhatsApp</title>
-  <link rel="stylesheet" href="main.css" />
-</head>
-<body>
-
-  <button id="whatsapp-btn">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" />
-    Fale conosco no WhatsApp
-  </button>
-
-  <!-- Importa o JavaScript no final do body -->
-  <script src="main.js"></script>
 </body>
 </html>

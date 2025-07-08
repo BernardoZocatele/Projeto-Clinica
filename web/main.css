@@ -149,6 +149,15 @@ button:hover {
         flex-direction: column;
     }
 }
+
+.adicionais {
+    padding: 0px 0px 15px 0px;
+
+    & button {
+        margin-right: 10px;
+    }
+}
+
 #whatsapp-btn {
   display: flex;
   align-items: center;

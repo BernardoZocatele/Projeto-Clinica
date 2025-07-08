@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Castelli - Login</title>
     <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -70,9 +71,29 @@
             }
         }
 
+        function mensagem_usuario(mensagem) {
+            Toastify({
+                text: mensagem,
+                duration: 4000,
+                newWindow: true,
+                gravity: "top",
+                position: "right", 
+                stopOnFocus: true, 
+                style: {
+                background: "red",
+                width: "450px",
+                textAlign: "center",
+                borderRadius: "10px"
+                },
+            }).showToast();
+        }
+
         eel.expose(receber_login);
+        eel.expose(mensagem_usuario);
 
     </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 </html>
